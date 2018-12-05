@@ -3,11 +3,10 @@
 
 TEST(StackTests, WhenPushAddToFirstInStack)
 {
-	int a{ 1 }, b{ 2 }, c{ 3 };
 	Stack<int> *intStack = new Stack<int>();
-	intStack->Push(a);
-	intStack->Push(b);
-	intStack->Push(c);
+	intStack->Push(1);
+	intStack->Push(2);
+	intStack->Push(3);
 
 	EXPECT_EQ(intStack->Pop(), 3);
 }
@@ -35,4 +34,26 @@ TEST(StackTests, WhenPopStackShouldDecreaseInSize)
 	size = intStack->Size();
 	intStack->Pop();
 	EXPECT_TRUE(intStack->Size() < size);
+}
+
+TEST(StackTests, WhenStackIsEmptySizeOfStackShouldBeZero)
+{
+	int size{ 10 };
+	Stack<int> *intStack = new Stack<int>();
+	if(intStack->Empty())
+		size = intStack->Size();
+
+	EXPECT_EQ(size, 0);
+}
+
+TEST(StackTests, WhenTopIsCalledTheLastAddedInStackShouldBeReturned)
+{
+	Stack<int> *intStack = new Stack<int>();
+	intStack->Push(1);
+	intStack->Push(2);
+	intStack->Push(3);
+	intStack->Push(4);
+	intStack->Push(5);
+
+	EXPECT_EQ(intStack->Top(), 5);
 }

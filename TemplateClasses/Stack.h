@@ -12,10 +12,15 @@ public:
 	void Push(T data) { stack.push_back(data); };
 	T Pop()
 	{ 
-		T em = stack.back(); 
+		T data = stack.back(); 
 		stack.erase(stack.end() - 1); 
-		return em;
+		return data;
 	};
+	T Top()
+	{
+		T data = stack.back();
+		return data;
+	}
 	int Size() { return stack.size(); };
 	bool Empty() { return stack.empty(); };
 };
