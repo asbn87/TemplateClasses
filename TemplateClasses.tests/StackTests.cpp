@@ -12,7 +12,27 @@ TEST(StackTests, WhenPushAddToFirstInStack)
 	EXPECT_EQ(intStack->Pop(), 3);
 }
 
-TEST(StackTests, WhenPopRemoveFirstInStack)
+TEST(StackTests, WhenPushStackShouldIncreaseInSize)
 {
-	//
+	int size{ 0 };
+	Stack<int> *intStack = new Stack<int>();
+	intStack->Push(1);
+	intStack->Push(2);
+	intStack->Push(3);
+	size = intStack->Size();
+	intStack->Push(4);
+
+	EXPECT_TRUE(intStack->Size() > size);
+}
+
+TEST(StackTests, WhenPopStackShouldDecreaseInSize)
+{
+	int size{ 0 };
+	Stack<int> *intStack = new Stack<int>();
+	intStack->Push(1);
+	intStack->Push(2);
+	intStack->Push(3);
+	size = intStack->Size();
+	intStack->Pop();
+	EXPECT_TRUE(intStack->Size() < size);
 }
