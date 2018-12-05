@@ -26,7 +26,7 @@ private:
 public: 
 	LinkedList();
 	template <class T>
-	AddNode(T AddData) {
+	void AddNode(T AddData) {
 		Nodeptr n = new Node;
 		n->next = NULL;
 		n->data = AddData;
@@ -43,7 +43,7 @@ public:
 		}
 	}
 	template<class T>
-	DeleteNode(T DelData) {
+	void DeleteNode(T DelData) {
 		Nodeptr delPtr = NULL;
 		temp = head;
 		curr = head;
@@ -65,7 +65,7 @@ public:
 		}
 	}
 	template <class T>
-	PrintList() {
+	void PrintList() {
 		curr = head;
 		while (curr != NULL) {
 			cout << curr->data << endl;
