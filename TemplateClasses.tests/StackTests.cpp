@@ -1,6 +1,13 @@
 #include "gtest/gtest.h"
+#include "../TemplateClasses/Stack.h"
 
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
+TEST(StackTests, WhenPushAddToFirstInStack)
+{
+	int a{ 1 }, b{ 2 }, c{ 3 };
+	Stack<int> *intStack = new Stack<int>();
+	intStack->Push(a);
+	intStack->Push(b);
+	intStack->Push(c);
+
+	EXPECT_EQ(intStack->Pop(), 3);
 }
