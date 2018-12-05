@@ -11,3 +11,8 @@ TEST(StackTests, WhenPushAddToFirstInStack)
 
 	EXPECT_EQ(intStack->Pop(), 3);
 }
+
+TEST(StackTests, WhenPopRemoveFirstInStack)
+{
+	//
+}

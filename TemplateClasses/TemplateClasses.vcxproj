@@ -115,11 +115,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DoubleLinkedList.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Stack.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Queue.h" />
