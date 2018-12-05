@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{22A846FA-CB54-4B72-8BE0-FAB151673FEB}</ProjectGuid>
     <RootNamespace>TemplateClasses</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -116,7 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DoubleLinkedList.cpp" />
-    <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
