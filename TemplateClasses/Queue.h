@@ -35,7 +35,7 @@ public:
 			if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] != NULL)
 			{
 				this->queue.push_back(data);
-				this->indexOfLast += 1;
+				this->indexOfLast++;
 			}
 			else if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] == NULL)
 			{
@@ -45,7 +45,7 @@ public:
 			else
 			{
 				this->queue[this->indexOfLast + 1] = data;
-				this->indexOfLast += 1;
+				this->indexOfLast++;
 			}
 		}
 		else if (this->indexOfLast < this->indexOfFirst)
@@ -58,20 +58,21 @@ public:
 			{
 				this->queue.insert(this->queue.begin() + (this->indexOfLast + 1), data);
 			}
+			this->indexOfLast++;
 		}
 	}
 
 	T Pop()
 	{
 		T temp = this->queue[this->indexOfFirst];
-		this->queue[this->indexOfFirst] = nullptr;
+		this->queue[this->indexOfFirst] = NULL;
 		if (this->indexOfFirst + 1 == queue.size())
 		{
 			this->indexOfFirst = 0;
 		}
 		else
 		{
-			this->indexOfFirst += 1;
+			this->indexOfFirst++;
 		}
 		return temp;
 	}
