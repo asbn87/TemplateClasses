@@ -9,11 +9,11 @@ private:
 public:
 	Stack() {};
 	~Stack() {};
-	void Push(T data) { stack.push_back(data); }; //jag tycker det ser mer enhetligt ut med kodblocket på egna rader...
+	void Push(T data) { stack.push_back(data); };
 	T Pop()
 	{ 
 		T data = stack.back(); 
-		stack.erase(stack.end() - 1); //går det inte bara att erasea stack.back()?
+		stack.pop_back();
 		return data;
 	};
 	T Top()

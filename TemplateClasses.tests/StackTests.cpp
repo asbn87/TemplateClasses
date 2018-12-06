@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "../TemplateClasses/Stack.h"
 
-TEST(StackTests, WhenPushAddToFirstInStack) // top/first?
+TEST(StackTests, WhenPushAddToTopOfStack)
 {
 	Stack<int> *intStack = new Stack<int>();
 	intStack->Push(1);
@@ -13,12 +13,11 @@ TEST(StackTests, WhenPushAddToFirstInStack) // top/first?
 
 TEST(StackTests, WhenPushStackShouldIncreaseInSize)
 {
-	int size{ 0 };							//onödig? bör väl räcka deklarera på rad 21.
 	Stack<int> *intStack = new Stack<int>();
 	intStack->Push(1);
 	intStack->Push(2);
 	intStack->Push(3);
-	size = intStack->Size();
+	int size = intStack->Size();
 	intStack->Push(4);
 
 	EXPECT_TRUE(intStack->Size() > size);
@@ -26,13 +25,13 @@ TEST(StackTests, WhenPushStackShouldIncreaseInSize)
 
 TEST(StackTests, WhenPopStackShouldDecreaseInSize)
 {
-	int size{ 0 };
 	Stack<int> *intStack = new Stack<int>();
 	intStack->Push(1);
 	intStack->Push(2);
 	intStack->Push(3);
-	size = intStack->Size();
+	int size = intStack->Size();
 	intStack->Pop();
+
 	EXPECT_TRUE(intStack->Size() < size);
 }
 
