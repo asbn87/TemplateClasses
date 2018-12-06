@@ -9,7 +9,7 @@ private:
 	int indexOfFirst;
 	int indexOfLast;
 
-	public:
+public:
 	Queue(){}
 	~Queue(){}
 
@@ -24,14 +24,20 @@ private:
 
 	void Push(T data)
 	{
-		if (this->indexOfFirst < this->indexOfLast)
+		if (this->queue.size() == 0)
 		{
-			if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] != nullptr)
+			this->queue.push_back(data);
+			this->indexOfFirst = 0;
+			this->indexOfLast = 0;
+		}
+		else if (this->indexOfFirst < this->indexOfLast || this->indexOfFirst == this->indexOfLast)
+		{
+			if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] != NULL)
 			{
 				this->queue.push_back(data);
 				this->indexOfLast += 1;
 			}
-			else if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] == nullptr)
+			else if (this->indexOfLast + 1 == this->queue.size() && this->queue[0] == NULL)
 			{
 				this->queue[0] = data;
 				this->indexOfLast = 0;
@@ -42,15 +48,15 @@ private:
 				this->indexOfLast += 1;
 			}
 		}
-		if (this->indexOfLast < this->indexOfFirst)
+		else if (this->indexOfLast < this->indexOfFirst)
 		{
-			if (this->queue[indexOfLast + 1] == nullptr)
+			if (this->queue[this->indexOfLast + 1] == NULL)
 			{
-				this->queue[indexOfLast + 1] = data;
+				this->queue[this->indexOfLast + 1] = data;
 			}
 			else
 			{
-				this->queue.insert(this->indexOfLast + 1, data);
+				this->queue.insert(this->queue.begin() + (this->indexOfLast + 1), data);
 			}
 		}
 	}

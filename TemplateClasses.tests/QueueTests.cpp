@@ -1,6 +1,11 @@
 #include "gtest/gtest.h"
+#include "../TemplateClasses/Queue.h"
 
-TEST(QueueTests, Test) {
-  //EXPECT_EQ(1, 1);
-  //EXPECT_TRUE(true);
+TEST(QueueTests, WhenPushingQueueSizeShouldIncrease) 
+{
+	Queue<int> *intQueue = new Queue<int>;
+	intQueue->Push(1);
+	intQueue->Push(2);
+	intQueue->Push(3);
+  EXPECT_EQ(3, intQueue->Size());
 }
