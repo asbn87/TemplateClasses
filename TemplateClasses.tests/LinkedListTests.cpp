@@ -22,36 +22,64 @@ TEST(LinkedListTests, WhenPushFrontHeadsNextShouldBeOldHead)
 	EXPECT_EQ(2, list->Front()->next->data);
 }
 
-TEST(LinkedListTests, WhenPushFrontShouldInputFivenumbersToList) {
-
-	LinkedList<int>* List = new LinkedList<int>();
-	List->PushFront(0);
-	List->PushFront(1);
-	List->PushFront(2);
-	List->PushFront(3);
-	List->PushFront(4);
-
-	EXPECT_TRUE(true);
-}
-
-TEST(LinkedListTests, ShouldPushBackItemsToTheBackOfTheList) {
-	LinkedList<int>* List = new LinkedList<int>();
-	List->PushBack(8);
-	List->PushBack(3);
-	List->PushBack(9);
+TEST(LinkedListTests, WhenPushBackTailShouldBeUpdated)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
 	
-	EXPECT_TRUE(true);
-
+	EXPECT_EQ(3, list->Back()->data);
 }
 
-TEST(LinkedListTests, CanitWorkWithChars) {
-	LinkedList<const char>* List = new LinkedList<const char>();
+TEST(LinkedListTests, FrontAndBackShouldNotBeTheSameWhenPushBack)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
 
-	//List->PushFront("Hej");
+	EXPECT_TRUE(list->Front()->data != list->Back()->data);
+}
 
+TEST(LinkedListTests, FrontAndBackShouldNotBeTheSameWhenPushFront)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushFront(1);
+	list->PushFront(2);
+	list->PushFront(3);
+
+	EXPECT_TRUE(list->Front()->data != list->Back()->data);
+}
+
+TEST(LinkedListTests, ListShouldBeAbleToStoreStrings)
+{
+	LinkedList<std::string>* list = new LinkedList<std::string>();
 	
-
+	EXPECT_NO_THROW(list->PushFront("This is a string"));
 }
+
+TEST(LinkedListTests, ListShouldBeAbleToStoreInts)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+
+	EXPECT_NO_THROW(list->PushFront(1));
+}
+
+TEST(LinkedListTests, ListShouldBeAbleToStoreChars)
+{
+	LinkedList<char>* list = new LinkedList<char>();
+
+	EXPECT_NO_THROW(list->PushFront('a'));
+}
+
+TEST(LinkedListTests, ListShouldBeAbleToStoreDoubles)
+{
+	LinkedList<double>* list = new LinkedList<double>();
+
+	EXPECT_NO_THROW(list->PushFront(0.05));
+}
+
 
 //TEST(LinkedListtests, CheckSize) {
 //	LinkedList<int>* List = new LinkedList<int>();
