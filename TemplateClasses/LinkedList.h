@@ -22,9 +22,9 @@ public:
 		LinkedList<T>::Node* getNext() { return next; };
 	};
 private:
-	LinkedList<T>::Node *head, *tail;
-	void setHead(LinkedList<T>::Node *head) { this->head = head; };
-	void setTail(LinkedList<T>::Node *tail) { this->tail = tail; };
+	LinkedList<T>::Node* head, *tail;
+	void setHead(LinkedList<T>::Node* head) { this->head = head; };
+	void setTail(LinkedList<T>::Node* tail) { this->tail = tail; };
 public:
 	~LinkedList() {};
 	LinkedList() : head{ NULL }, tail{ NULL } {};
@@ -32,7 +32,7 @@ public:
 	LinkedList<T>::Node* Back() { return tail; };
 	void PushFront(const T& data)
 	{
-		LinkedList<T>::Node* node = new Node<T>(data);
+		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
 
 		if (head == NULL)
 		{

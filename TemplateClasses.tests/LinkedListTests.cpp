@@ -8,7 +8,7 @@ TEST(LinkedListTests, WhenPushFrontHeadShouldBeUpdated)
 	list->PushFront(1);
 	list->PushFront(2);
 	list->PushFront(3);
-
+	
 	EXPECT_EQ(3, list->Front()->getData());
 }
 
