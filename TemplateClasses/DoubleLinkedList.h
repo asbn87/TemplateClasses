@@ -31,8 +31,21 @@ private:
 	DoubleLinkedList<T>::Node *head, *tail;
 	void setHead(DoubleLinkedList<T>::Node* head) { this->head = head; }
 	void setTail(DoubleLinkedList<T>::Node* tail) { this->tail = tail; }
-	DoubleLinkedList<T>::Node* GetNode(T data)
-	{}
+	DoubleLinkedList<T>::Node *GetNode(int index)
+	{
+		DoubleLinkedList<T>::Node *temp = this->head;
+		int count = 0;
+		while (count != index)
+		{
+			if (temp == NULL)
+			{
+				return;
+			}
+			temp = temp->next;
+			count++;
+		}
+		return temp;
+	}
 
 public:
 	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
@@ -113,13 +126,19 @@ public:
 	}
 	T Get(int index)
 	{
-
+		DoubleLinkedList<T>::Node *temp = GetNode(index);
+		return temp->data;
 	}
-	void Insert(int index)
+	void Insert(int index, T data)
 	{
+		DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node();
+		DoubleLinkedList<T>::Node *temp = GetNode(index);
+		node->data = data;
+		node->next = temp;
+		node->previous = temp->previous;
+		temp->previous = node;
 	}
 	void Delete(int index)
 	{
 	}
-	
 };
