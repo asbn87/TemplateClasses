@@ -30,7 +30,7 @@ public:
 	LinkedList() : head{ NULL }, tail{ NULL } {};
 	LinkedList<T>::Node* Front() { return head; };
 	LinkedList<T>::Node* Back() { return tail; };
-	void PushFront(const T& data)
+	void PushFront(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
 
@@ -42,17 +42,58 @@ public:
 		else
 		{
 			node->setNext(head);
-			head = node;
+			setHead(node);
 		}
 	};
-	void PushBack(const T& data)
+	void PushBack(T data)
 	{
+		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
+
+		if (head == NULL)
+		{
+			setHead(node);
+			setTail(node);
+		}
+		else
+		{
+			tail->setNext(node);
+			setTail(node);
+		}
 	};
-	LinkedList<T>::Node* PopFront()
+	T PopFront()
 	{
+		LinkedList<T>::Node* node = this->head;
+		T data = node->getData();
+		if (node->next != NULL)
+		{
+			setHead(this->head->next);
+		}
+		else
+		{
+			setHead(NULL);
+			setTail(NULL);
+		}
+		delete node;
+		return data;
 	};
-	LinkedList<T>::Node* PopBack()
+	T PopBack()
 	{
+		LinkedList<T>::Node* curr = this->head;
+		LinkedList<T>::Node* prev = curr;
+		LinkedList<T>::Node* node = this->tail;
+		T data = node->getData();
+		if (curr->next != NULL)
+		{
+			while (curr->next != NULL)
+			{
+				prev = curr;
+				curr = curr->next;
+			}
+		}
+		prev->next = NULL;
+		setTail(prev);
+		delete node;
+		return data;
 	};
 	int Length()
 	{
