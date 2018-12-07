@@ -3,12 +3,11 @@
 template <class T>
 class LinkedList
 {
-public:
+private:
 	class Node {
-	private:
+	public:
 		T data;
 		LinkedList<T>::Node* next;
-	public:
 		Node() {};
 		Node(T data)
 		{
@@ -16,15 +15,8 @@ public:
 			this->next = NULL;
 		};
 		~Node() {};
-		void setData(T data) { this->data = data; };
-		T getData() { return data; };
-		void setNext(LinkedList<T>::Node* next) { this->next = next; };
-		LinkedList<T>::Node* getNext() { return next; };
 	};
-private:
 	LinkedList<T>::Node* head, *tail;
-	void setHead(LinkedList<T>::Node* head) { this->head = head; };
-	void setTail(LinkedList<T>::Node* tail) { this->tail = tail; };
 public:
 	~LinkedList() {};
 	LinkedList() : head{ NULL }, tail{ NULL } {};
@@ -36,42 +28,42 @@ public:
 
 		if (head == NULL)
 		{
-			setHead(node);
-			setTail(node);
+			this->head = node;
+			this->tail = node;
 		}
 		else
 		{
-			node->setNext(head);
-			setHead(node);
+			node->next = head;
+			this->head = node;
 		}
 	};
 	void PushBack(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
 
-		if (head == NULL)
+		if (this->head == NULL)
 		{
-			setHead(node);
-			setTail(node);
+			this->head = node;
+			this->tail = node;
 		}
 		else
 		{
-			tail->setNext(node);
-			setTail(node);
+			this->tail->next = node;
+			this->tail = node;
 		}
 	};
 	T PopFront()
 	{
 		LinkedList<T>::Node* node = this->head;
-		T data = node->getData();
+		T data = node->data;
 		if (node->next != NULL)
 		{
-			setHead(this->head->next);
+			this->head = this->head->next;
 		}
 		else
 		{
-			setHead(NULL);
-			setTail(NULL);
+			this->head = NULL;
+			this->tail = NULL;
 		}
 		delete node;
 		return data;
@@ -81,7 +73,7 @@ public:
 		LinkedList<T>::Node* curr = this->head;
 		LinkedList<T>::Node* prev = curr;
 		LinkedList<T>::Node* node = this->tail;
-		T data = node->getData();
+		T data = node->data;
 		if (curr->next != NULL)
 		{
 			while (curr->next != NULL)
@@ -91,20 +83,70 @@ public:
 			}
 		}
 		prev->next = NULL;
-		setTail(prev);
+		this->tail = prev;
 		delete node;
 		return data;
 	};
-	int Length()
+	int Size()
 	{
+		LinkedList<T>::Node* curr;
+		int size{ 0 };
+		if (this->head != NULL)
+		{
+			curr = this->head;
+			size++;
+			if (curr->next != NULL)
+			{
+				curr = curr->next;
+				size++;
+			}
+		}
+		return size;
 	};
-	void Insert()
+	void Insert(int index, T data)
 	{
+		if (index > 0)
+		{
+			LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
+			LinkedList<T>::Node* prev = GetNode(index - 1);
+			node->next = prev->next;
+			prev->next = node;
+		}
+		else
+		{
+			pushFront(data);
+		}
 	};
-	void Delete()
+	void Delete(int index)
 	{
+		if (index > 0)
+		{
+			LinkedList<T>::Node* node = GetNode(index);
+			LinkedList<T>::Node* prev = GetNode(index - 1);
+			node->next = prev->next;
+			delete node;
+		}
+		else
+		{
+			popFront(data);
+		}
 	};
-	LinkedList<T>::Node* GetNode(T data)
+	LinkedList<T>::Node* GetNode(int index)
 	{
+		LinkedList<T>::Node* curr = this->head;
+		int count{ 0 };
+		while (count != index)
+		{
+			if (curr->next != NULL)
+			{
+				curr = curr->next;
+				count++;
+			}
+			else
+			{
+				return NULL;
+			}
+		}
+		return curr;
 	};
 };

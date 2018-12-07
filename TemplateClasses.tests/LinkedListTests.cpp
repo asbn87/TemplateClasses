@@ -9,7 +9,7 @@ TEST(LinkedListTests, WhenPushFrontHeadShouldBeUpdated)
 	list->PushFront(2);
 	list->PushFront(3);
 	
-	EXPECT_EQ(3, list->Front()->getData());
+	EXPECT_EQ(3, list->Front()->data);
 }
 
 TEST(LinkedListTests, WhenPushFrontHeadsNextShouldBeOldHead)
@@ -19,5 +19,5 @@ TEST(LinkedListTests, WhenPushFrontHeadsNextShouldBeOldHead)
 	list->PushFront(2);
 	list->PushFront(3);
 
-	EXPECT_EQ(2, list->Front()->getNext()->getData());
+	EXPECT_EQ(2, list->Front()->next->data);
 }
