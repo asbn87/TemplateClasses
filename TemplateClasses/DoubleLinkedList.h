@@ -19,13 +19,7 @@ private:
 			this->previous = NULL;
 		};
 		~Node() {};
-		void setData(T data) { this->data = data; }
-		T getData() { return this->data; }
-		void setNext(DoubleLinkedList<T>::Node *next) { this->next = next; }
-		void setPrevious(DoubleLinkedList<T>::Node *previous) { this->previous = previous; }
-		DoubleLinkedList<T>::Node* getNext() { return next; }
-		DoubleLinkedList<T>::Node* getPrevious() { return previous; }
-	};
+		};
 
 	DoubleLinkedList<T>::Node *head, *tail;
 	void setHead(DoubleLinkedList<T>::Node* head) { this->head = head; }
@@ -57,31 +51,31 @@ public:
 
 		if (head == NULL)
 		{
-			setHead(node);
-			setTail(node);
+			this->head = node;
+			this->tail = node;
 		}
 		else
 		{
-			this->head->setPrevious(node);
-			node->setNext(head);
+			this->head->previous = node;
+			node->next = this->head;
 			this->head = node;
 		}
 	}
 	void PushBack(T data)
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
-		node->setPrevious(this->tail);
-		this->tail->setNext(node);
+		node->previous = this->tail;
+		this->tail->next = node;
 		this->tail = node;
 	}
 	T PopFront()
 	{
 		DoubleLinkedList<T>::Node* node = this->head;
-		T data = node->getData();
+		T data = node->data;
 		if (node->next != NULL)
 		{
-			setHead(this->head->next);
-			this->head->setPrevious(NULL);
+			this->head = this->head->next;
+			this->head->previous = NULL;
 		}
 		else
 		{
@@ -94,11 +88,11 @@ public:
 	T PopBack()
 	{
 		DoubleLinkedList<T>::Node* node = this->tail;
-		T data = node->getData();
+		T data = node->data;
 		if (node->previous != NULL)
 		{
-			setTail(this->tail->previous);
-			this->tail->setNext(NULL);
+			this->tail = this->tail->previous;
+			this->tail->next = NULL;
 		}
 		else
 		{
@@ -130,6 +124,11 @@ public:
 	}
 	void Insert(int index, T data)
 	{
+		if (index == 0)
+		{
+			PushFront(data);
+			return;
+		}
 		DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node();
 		DoubleLinkedList<T>::Node *temp = GetNode(index);
 		node->data = data;
