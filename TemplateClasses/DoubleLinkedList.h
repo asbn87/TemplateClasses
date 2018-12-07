@@ -140,5 +140,9 @@ public:
 	}
 	void Delete(int index)
 	{
+		DoubleLinkedList<T>::Node *temp = GetNode(index);
+		temp->previous->next = temp->next;
+		temp->next->previous = temp->previous;
+		delete temp;
 	}
 };
