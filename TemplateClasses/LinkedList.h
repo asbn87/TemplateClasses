@@ -1,27 +1,26 @@
 #pragma once
 
 template <class T>
-class Node {
-private:
-	T data;
-	Node<T>* next;
-public:
-	Node() {};
-	Node(T data)
-	{
-		this->data = data;
-		this->next = NULL;
-	};
-	~Node() {};
-	void setData(T data) { this->data = data; };
-	T getData() { return data; };
-	void setNext(Node<T>* next) { this->next = next; };
-	Node<T>* getNext() { return next; };
-};
-
-template <class T>
 class LinkedList
 {
+public:
+	class Node {
+	private:
+		T data;
+		Node<T>* next;
+	public:
+		Node() {};
+		Node(T data)
+		{
+			this->data = data;
+			this->next = NULL;
+		};
+		~Node() {};
+		void setData(T data) { this->data = data; };
+		T getData() { return data; };
+		void setNext(Node<T>* next) { this->next = next; };
+		Node<T>* getNext() { return next; };
+	};
 private:
 	Node<T>*head, *tail;
 	void setHead(Node<T> *head) { this->head = head; };
@@ -64,7 +63,7 @@ public:
 	void Delete()
 	{
 	};
-	Node<T>* GetNode()
+	Node<T>* GetNode(T data)
 	{
 	};
 };
