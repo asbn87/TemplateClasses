@@ -7,7 +7,7 @@ public:
 	class Node {
 	private:
 		T data;
-		Node<T>* next;
+		LinkedList<T>::Node* next;
 	public:
 		Node() {};
 		Node(T data)
@@ -18,21 +18,21 @@ public:
 		~Node() {};
 		void setData(T data) { this->data = data; };
 		T getData() { return data; };
-		void setNext(Node<T>* next) { this->next = next; };
-		Node<T>* getNext() { return next; };
+		void setNext(LinkedList<T>::Node* next) { this->next = next; };
+		LinkedList<T>::Node* getNext() { return next; };
 	};
 private:
-	Node<T>*head, *tail;
-	void setHead(Node<T> *head) { this->head = head; };
-	void setTail(Node<T> *tail) { this->tail = tail; };
+	LinkedList<T>::Node *head, *tail;
+	void setHead(LinkedList<T>::Node *head) { this->head = head; };
+	void setTail(LinkedList<T>::Node *tail) { this->tail = tail; };
 public:
 	~LinkedList() {};
 	LinkedList() : head{ NULL }, tail{ NULL } {};
-	Node<T>* Front() { return head; };
-	Node<T>* Back() { return tail; };
+	LinkedList<T>::Node* Front() { return head; };
+	LinkedList<T>::Node* Back() { return tail; };
 	void PushFront(const T& data)
 	{
-		Node<T>* node = new Node<T>(data);
+		LinkedList<T>::Node* node = new Node<T>(data);
 
 		if (head == NULL)
 		{
@@ -48,10 +48,10 @@ public:
 	void PushBack(const T& data)
 	{
 	};
-	Node<T>* PopFront()
+	LinkedList<T>::Node* PopFront()
 	{
 	};
-	Node<T>* PopBack()
+	LinkedList<T>::Node* PopBack()
 	{
 	};
 	int Length()
@@ -63,7 +63,7 @@ public:
 	void Delete()
 	{
 	};
-	Node<T>* GetNode(T data)
+	LinkedList<T>::Node* GetNode(T data)
 	{
 	};
 };
