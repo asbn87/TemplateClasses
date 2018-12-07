@@ -1,80 +1,70 @@
 #pragma once
-#include <iostream>
-#include <cstdlib>
-
-using namespace std;
-
 
 template <class T>
-class LinkedList{
+class Node {
 private:
-	typedef struct Node {
-		int data;
-		struct Node *next;
-	}* Nodeptr;
-	typedef struct Node* Nodeptr;
-
-	Nodeptr head;
-	Nodeptr curr;
-	Nodeptr temp;
-	template <class T>
-	LinkedList() {
-		head = NULL;
-		curr = NULL;
-		temp = NULL;
-	}
-public: 
-	LinkedList();
-	template <class T>
-	void AddNode(T AddData) {
-		Nodeptr n = new Node;
-		n->next = NULL;
-		n->data = AddData;
-
-		if (head != NULL) {
-			curr = head;
-			while (curr->next != NULL) {
-				curr = curr->next;
-			}
-			curr->next = n;
-		}
-		else {
-			head = n;
-		}
-	}
-	template<class T>
-	void DeleteNode(T DelData) {
-		Nodeptr delPtr = NULL;
-		temp = head;
-		curr = head;
-		while (curr != NULL && curr->data != DelData) {
-			temp = curr;
-			curr = curr->next;
-		}
-		if (curr == NULL) {
-			cout << "DelData " << "was not in the list \n" << endl;
-			delete delPtr;
-		}
-		else {
-			delPtr = curr;
-			curr = curr->next;
-			temp->next = curr;
-			delete delPtr;
-			cout << "The value " << DelData << "was deleted \n" << endl;
-
-		}
-	}
-	template <class T>
-	void PrintList() {
-		curr = head;
-		while (curr != NULL) {
-			cout << curr->data << endl;
-			curr = curr->next;
-		}
-	}
-
-
-	
-
+	T data;
+	Node<T>* next;
+public:
+	Node() {};
+	Node(T data)
+	{
+		this->data = data;
+		this->next = NULL;
+	};
+	~Node() {};
+	void setData(T data) { this->data = data; };
+	T getData() { return data; };
+	void setNext(Node<T>* next) { this->next = next; };
+	Node<T>* getNext() { return next; };
 };
 
+template <class T>
+class LinkedList
+{
+private:
+	Node<T>*head, *tail;
+	void setHead(Node<T> *head) { this->head = head; };
+	void setTail(Node<T> *tail) { this->tail = tail; };
+public:
+	~LinkedList() {};
+	LinkedList() : head{ NULL }, tail{ NULL } {};
+	Node<T>* Front() { return head; };
+	Node<T>* Back() { return tail; };
+	void PushFront(const T& data)
+	{
+		Node<T>* node = new Node<T>(data);
+
+		if (head == NULL)
+		{
+			setHead(node);
+			setTail(node);
+		}
+		else
+		{
+			node->setNext(head);
+			head = node;
+		}
+	};
+	void PushBack(const T& data)
+	{
+	};
+	Node<T>* PopFront()
+	{
+	};
+	Node<T>* PopBack()
+	{
+	};
+	int Length()
+	{
+	};
+	void Insert()
+	{
+	};
+	void Delete()
+	{
+	};
+	Node<T>* GetNode()
+	{
+	};
+};
