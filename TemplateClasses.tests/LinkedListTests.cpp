@@ -53,27 +53,27 @@ TEST(LinkedListTests, CanitWorkWithChars) {
 
 }
 
-TEST(LinkedListtests, CheckSize) {
-	LinkedList<int>* List = new LinkedList<int>();
-	List->PushBack(9);
-	List->PushBack(3);
-	List->PushBack(2);
-	
-	EXPECT_EQ(3, List<int>.size() == 3);
-}
-
-TEST(LinkedListTests, TestIfTheStringsAreEqual) {
-	LinkedList<std::string>* List = new LinkedList<std::string>();
-	std::string hej = "HEJ";
-	List->PushFront(hej);
-	
-	EXPECT_EQ(hej, List->PopFront());
-
-}
-
-TEST(LinkedListTests, TestIfTheStringsAreEqual) {
-	std::string hej = "HEJ";
-
-	EXPECT_STREQ("hej", "hej");
-
-}
+//TEST(LinkedListtests, CheckSize) {
+//	LinkedList<int>* List = new LinkedList<int>();
+//	List->PushBack(9);
+//	List->PushBack(3);
+//	List->PushBack(2);
+//	
+//	EXPECT_EQ(3, List<int>.size());
+//}
+//
+//TEST(LinkedListTests, TestIfTheStringsAreEqual) {
+//	LinkedList<std::string>* List = new LinkedList<std::string>();
+//	std::string hej = "HEJ";
+//	List->PushFront(hej);
+//	
+//	EXPECT_EQ(hej, List->PopFront());
+//
+//}
+//
+//TEST(LinkedListTests, TestIfTheStringsAreEqual) {
+//	std::string hej = "HEJ";
+//
+//	EXPECT_STREQ("hej", "hej");
+//
+//}

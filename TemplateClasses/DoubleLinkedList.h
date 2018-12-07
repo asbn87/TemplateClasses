@@ -3,14 +3,14 @@
 template <class T>
 class DoubleLinkedList
 {
-public:
-	class Node {
-	private:
+private:
+	class Node 
+	{
+	public:
 		T data;
 		DoubleLinkedList<T>::Node *next;
 		DoubleLinkedList<T>::Node *previous;
 
-	public:
 		Node() {};
 		Node(T data)
 		{
@@ -27,7 +27,6 @@ public:
 		DoubleLinkedList<T>::Node* getPrevious() { return previous; }
 	};
 
-private:
 	DoubleLinkedList<T>::Node *head, *tail;
 	void setHead(DoubleLinkedList<T>::Node* head) { this->head = head; }
 	void setTail(DoubleLinkedList<T>::Node* tail) { this->tail = tail; }
@@ -39,7 +38,7 @@ private:
 		{
 			if (temp == NULL)
 			{
-				return;
+				return NULL;
 			}
 			temp = temp->next;
 			count++;
@@ -50,8 +49,8 @@ private:
 public:
 	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
 	~DoubleLinkedList() {}
-	T Front() { return this->head->getData(); }
-	T Back() { return this->tail->getData(); }
+	T Front() { return this->head->data; }
+	T Back() { return this->tail->data; }
 	void PushFront(T data)
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
