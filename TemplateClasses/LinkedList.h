@@ -124,7 +124,7 @@ public:
 				}
 				return size;
 			}
-			else { return size; }
+			return size;
 		}
 		return size;
 	};
@@ -148,7 +148,7 @@ public:
 			node->next = prev->next;
 			delete node;
 		}
-		else { popFront(data); }
+		else { popFront(); }
 	};
 	T getData(int index)
 	{

@@ -94,10 +94,10 @@ TEST(LinkedListTests, WhenWrongIndexIsCalledNullShouldBeReturnedFromGetData)
 TEST(LinkedListTests, WhenRightIndexIsCalledCorrectDataShouldBeReturnedFromGetData)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);
-	list->PushBack(2);
-	list->PushBack(3);
-	list->PushBack(4);
+	list->PushBack(1); // 0
+	list->PushBack(2); // 1
+	list->PushBack(3); // 2
+	list->PushBack(4); // 3
 
 	EXPECT_EQ(2, list->getData(1));
 }
@@ -105,21 +105,47 @@ TEST(LinkedListTests, WhenRightIndexIsCalledCorrectDataShouldBeReturnedFromGetDa
 TEST(LinkedListTests, WhenMixingPushAndPopSizeShouldBeCorrect)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);
-	list->PopBack();
-	list->PushFront(2);
-	list->PushBack(3);
-	list->PushBack(4);
-	list->PopFront();
-	list->PushFront(5);
+	list->PushBack(1);	// 1
+	list->PopBack();	// 0
+	list->PushFront(2);	// 1
+	list->PushBack(3);	// 2
+	list->PushBack(4);	// 3
+	list->PopFront();	// 2
+	list->PushFront(5); // 3
+	list->PopBack();	// 2
 
-	EXPECT_EQ(3, list->Size());
+	EXPECT_EQ(2, list->Size());
 }
 
+TEST(LinkedListTests, WhenMixingPushAndPopHeadShouldBeCorrect)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);	// 1
+	list->PopBack();	//
+	list->PushFront(2); // 2
+	list->PushBack(3);	// 2, 3
+	list->PushBack(4);	// 2, 3, 4
+	list->PopFront();	// 3, 4
+	list->PushFront(5); // 5, 3, 4
+	list->PopBack();	// 5, 3
 
+	EXPECT_EQ(5, list->getData(0));
+}
 
+TEST(LinkedListTests, WhenMixingPushAndPopTailShouldBeCorrect)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);	// 1
+	list->PushFront(2); // 2, 1
+	list->PushBack(3);	// 2, 1, 3
+	list->PopFront();	// 1, 3
+	list->PushFront(4); // 4, 1, 3
+	list->PopBack();	// 4, 1
+	list->PushBack(5);	// 4, 1, 5
+	int index = list->Size() - 1;
 
-
+	EXPECT_EQ(5, list->getData(index));
+}
 
 //TEST(LinkedListtests, CheckSize) {
 //	LinkedList<int>* List = new LinkedList<int>();
