@@ -17,11 +17,24 @@ private:
 		~Node() {};
 	};
 	LinkedList<T>::Node* head, *tail;
+	LinkedList<T>::Node* GetNode(int index)
+	{
+		LinkedList<T>::Node* curr = this->head;
+		int count{ 0 };
+		while (count != index)
+		{
+			if (curr->next != NULL)
+			{
+				curr = curr->next;
+				count++;
+			}
+			else { return NULL; }
+		}
+		return curr;
+	};
 public:
 	~LinkedList() {};
 	LinkedList() : head{ NULL }, tail{ NULL } {};
-	LinkedList<T>::Node* Front() { return head; };
-	LinkedList<T>::Node* Back() { return tail; };
 	void PushFront(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
@@ -55,17 +68,19 @@ public:
 	T PopFront()
 	{
 		LinkedList<T>::Node* node = this->head;
-		T data = node->data;
-		if (node->next != NULL)
+		T data;
+		if (node != NULL)
 		{
-			this->head = this->head->next;
+			data = node->data;
+			if (node->next != NULL) { this->head = this->head->next; }
+			else
+			{
+				this->head = NULL;
+				this->tail = NULL;
+			}
+			delete node;
+			return data;
 		}
-		else
-		{
-			this->head = NULL;
-			this->tail = NULL;
-		}
-		delete node;
 		return data;
 	};
 	T PopBack()
@@ -73,18 +88,23 @@ public:
 		LinkedList<T>::Node* curr = this->head;
 		LinkedList<T>::Node* prev = curr;
 		LinkedList<T>::Node* node = this->tail;
-		T data = node->data;
-		if (curr->next != NULL)
+		T data;
+		if (curr != NULL && node != NULL)
 		{
-			while (curr->next != NULL)
+			data = node->data;
+			if (curr->next != NULL)
 			{
-				prev = curr;
-				curr = curr->next;
+				while (curr->next != NULL)
+				{
+					prev = curr;
+					curr = curr->next;
+				}
 			}
+			prev->next = NULL;
+			this->tail = prev;
+			delete node;
+			return data;
 		}
-		prev->next = NULL;
-		this->tail = prev;
-		delete node;
 		return data;
 	};
 	int Size()
@@ -97,9 +117,14 @@ public:
 			size++;
 			if (curr->next != NULL)
 			{
-				curr = curr->next;
-				size++;
+				while (curr->next != NULL)
+				{
+					curr = curr->next;
+					size++;
+				}
+				return size;
 			}
+			else { return size; }
 		}
 		return size;
 	};
@@ -112,10 +137,7 @@ public:
 			node->next = prev->next;
 			prev->next = node;
 		}
-		else
-		{
-			pushFront(data);
-		}
+		else { pushFront(data); }
 	};
 	void Delete(int index)
 	{
@@ -126,27 +148,13 @@ public:
 			node->next = prev->next;
 			delete node;
 		}
-		else
-		{
-			popFront(data);
-		}
+		else { popFront(data); }
 	};
-	LinkedList<T>::Node* GetNode(int index)
+	T getData(int index)
 	{
-		LinkedList<T>::Node* curr = this->head;
-		int count{ 0 };
-		while (count != index)
-		{
-			if (curr->next != NULL)
-			{
-				curr = curr->next;
-				count++;
-			}
-			else
-			{
-				return NULL;
-			}
-		}
-		return curr;
-	};
+		T data;
+		LinkedList<T>::Node* node = GetNode(index);
+		if(node != NULL) { return node->data; }
+		else { return data; }
+	}
 };

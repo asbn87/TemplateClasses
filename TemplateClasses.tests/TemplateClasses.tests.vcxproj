@@ -33,6 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClInclude Include="..\TemplateClasses\LinkedList.h" />
     <ClInclude Include="..\TemplateClasses\Queue.h" />
     <ClInclude Include="..\TemplateClasses\Stack.h" />
   </ItemGroup>
