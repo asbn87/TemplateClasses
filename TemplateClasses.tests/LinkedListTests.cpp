@@ -142,9 +142,8 @@ TEST(LinkedListTests, WhenMixingPushAndPopTailShouldBeCorrect)
 	list->PushFront(4); // 4, 1, 3
 	list->PopBack();	// 4, 1
 	list->PushBack(5);	// 4, 1, 5
-	int index = list->Size() - 1;
 
-	EXPECT_EQ(5, list->getData(index));
+	EXPECT_EQ(5, list->getData(list->Size()-1));
 }
 
 //TEST(LinkedListtests, CheckSize) {
