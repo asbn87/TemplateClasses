@@ -92,7 +92,13 @@ public:
 		if (curr != NULL && node != NULL)
 		{
 			data = node->data;
-			if (curr->next != NULL)
+			if (curr->next == NULL)
+			{
+				this->head = NULL;
+				this->tail = NULL;
+				return data;
+			}
+			else
 			{
 				while (curr->next != NULL)
 				{
@@ -103,28 +109,17 @@ public:
 			prev->next = NULL;
 			this->tail = prev;
 			delete node;
-			return data;
 		}
 		return data;
 	};
 	int Size()
 	{
-		LinkedList<T>::Node* curr;
+		LinkedList<T>::Node* curr = this->head;
 		int size{ 0 };
-		if (this->head != NULL)
+		while (curr != NULL)
 		{
-			curr = this->head;
-			size++;
-			if (curr->next != NULL)
-			{
-				while (curr->next != NULL)
-				{
 					curr = curr->next;
 					size++;
-				}
-				return size;
-			}
-			return size;
 		}
 		return size;
 	};
