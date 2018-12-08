@@ -118,8 +118,8 @@ public:
 		int size{ 0 };
 		while (curr != NULL)
 		{
-					curr = curr->next;
-					size++;
+			curr = curr->next;
+			size++;
 		}
 		return size;
 	};
