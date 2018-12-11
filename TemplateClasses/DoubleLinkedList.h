@@ -128,26 +128,24 @@ public:
 
 	T Get(int index)
 	{
-		DoubleLinkedList<T>::Node *temp = GetNode(index);
-		if (temp == nullptr)
-		{
-			return NULL;
-		}
-		return temp->data;
+		T data;
+		DoubleLinkedList<T>::Node* node = GetNode(index);
+		if (node != NULL) { return node->data; }
+		else { return data; }
 	}
 
 	void Insert(int index, T data)
 	{
-		if (index == 0)
+		if (index > 0)
 		{
-			PushFront(data);
-			return;
+			DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node(data);
+			DoubleLinkedList<T>::Node *prev = GetNode(index - 1);
+			node->next = prev->next;
+			prev->next->previous = node;
+			prev->next = node;
+			node->previous = prev;
 		}
-		DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node(data);
-		DoubleLinkedList<T>::Node *temp = GetNode(index);
-		node->next = temp;
-		node->previous = temp->previous;
-		temp->previous = node;
+		else { PushFront(data); }
 	}
 
 	void Delete(int index)

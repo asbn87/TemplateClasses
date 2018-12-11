@@ -4,7 +4,8 @@ template <class T>
 class LinkedList
 {
 private:
-	class Node {
+	class Node 
+	{
 	public:
 		T data;
 		LinkedList<T>::Node* next;

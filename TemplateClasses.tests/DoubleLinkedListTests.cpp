@@ -157,10 +157,10 @@ TEST(DoubleLinkedListTests, WhenInsertingSizeShouldBeUpdated)
 TEST(DoubleLinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndex)
 {
 	DoubleLinkedList<int>* list = new DoubleLinkedList<int>();
-	list->PushBack(1); // 0
-	list->PushBack(2); // 1
-	list->PushBack(3); // 2 -> 3
-	list->PushBack(4); // 3 -> 4
+	list->PushBack(1); // 1
+	list->PushBack(2); // 1, 2
+	list->PushBack(3); // 1, 2, 3
+	list->PushBack(4); // 1, 2, 3, 4
 	list->Insert(2, 9); // 2
 
 	EXPECT_EQ(9, list->Get(2));
