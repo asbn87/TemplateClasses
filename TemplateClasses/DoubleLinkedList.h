@@ -40,7 +40,18 @@ private:
 
 public:
 	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
-	~DoubleLinkedList() {}
+	~DoubleLinkedList() 
+	{
+		Node *current = this->head;
+		Node *next = this->head->next;
+		while (current != NULL)
+		{
+			delete current;
+			current = next;
+			next = next->next;
+		}
+	}
+
 	void PushFront(T data)
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
