@@ -112,7 +112,6 @@ TEST(LinkedListTests, PopBackShouldReturnLastElement)
 	EXPECT_EQ(5, list->PopBack());
 }
 
-
 TEST(LinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndexAndIndexUpdated)
 {
 	LinkedList<int>* list = new LinkedList<int>();
@@ -120,10 +119,23 @@ TEST(LinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndexAndIndexUpdat
 	list->PushBack(2);
 	list->PushBack(3);
 	list->PushBack(4);
-	list->Insert(2, 9);
+	LinkedList<int>::LIST_UPDATE_RESULT result = list->Insert(2, 9);
 
 	EXPECT_EQ(9, list->Get(2));
 	EXPECT_EQ(3, list->Get(3));
+	EXPECT_EQ(LinkedList<int>::LIST_UPDATE_RESULT_SUCCESS, result);
+}
+
+TEST(LinkedListTests, WhenInsertingOutOfRangeShouldReturnOutOfRange)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	LinkedList<int>::LIST_UPDATE_RESULT result = list->Insert(4, 9);
+
+	EXPECT_EQ(LinkedList<int>::LIST_UPDATE_RESULT_OUT_OF_RANGE, result);
 }
 
 TEST(LinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdated)
@@ -133,7 +145,21 @@ TEST(LinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdated)
 	list->PushBack(2);
 	list->PushBack(3);
 	list->PushBack(4);
-	list->Delete(2);
+	LinkedList<int>::LIST_UPDATE_RESULT result = list->Delete(2);
 
 	EXPECT_EQ(4, list->Get(2));
+	EXPECT_EQ(LinkedList<int>::LIST_UPDATE_RESULT_SUCCESS, result);
 }
+
+TEST(LinkedListTests, WhenDeletingOutOfRangeShouldReturnOutOfRange)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	LinkedList<int>::LIST_UPDATE_RESULT result = list->Delete(4);
+
+	EXPECT_EQ(LinkedList<int>::LIST_UPDATE_RESULT_OUT_OF_RANGE, result);
+}
+

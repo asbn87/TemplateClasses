@@ -121,10 +121,23 @@ TEST(DoubleLinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndexAndInde
 	list->PushBack(2);
 	list->PushBack(3);
 	list->PushBack(4);
-	list->Insert(2, 9);
-
+	DoubleLinkedList<int>::LIST_UPDATE_RESULT result = list->Insert(2, 9);
+	
 	EXPECT_EQ(9, list->Get(2));
 	EXPECT_EQ(3, list->Get(3));
+	EXPECT_EQ(DoubleLinkedList<int>::LIST_UPDATE_RESULT_SUCCESS, result);
+}
+
+TEST(DoubleLinkedListTests, WhenInsertingOutOfRangeShouldReturnOutOfRange)
+{
+	DoubleLinkedList<int>* list = new DoubleLinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	DoubleLinkedList<int>::LIST_UPDATE_RESULT result = list->Insert(4, 9);
+
+	EXPECT_EQ(DoubleLinkedList<int>::LIST_UPDATE_RESULT_OUT_OF_RANGE, result);
 }
 
 TEST(DoubleLinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdated)
@@ -134,7 +147,21 @@ TEST(DoubleLinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdate
 	list->PushBack(2);
 	list->PushBack(3);
 	list->PushBack(4);
-	list->Delete(2);
+	DoubleLinkedList<int>::LIST_UPDATE_RESULT result = list->Delete(2);
 
 	EXPECT_EQ(4, list->Get(2));
+	EXPECT_EQ(DoubleLinkedList<int>::LIST_UPDATE_RESULT_SUCCESS, result);
 }
+
+TEST(DoubleLinkedListTests, WhenDeletingOutOfRangeShouldReturnOutOfRange)
+{
+	DoubleLinkedList<int>* list = new DoubleLinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	DoubleLinkedList<int>::LIST_UPDATE_RESULT result = list->Delete(4);
+
+	EXPECT_EQ(DoubleLinkedList<int>::LIST_UPDATE_RESULT_OUT_OF_RANGE, result);
+}
+
