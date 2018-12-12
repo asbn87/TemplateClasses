@@ -170,7 +170,7 @@ public:
 
 	LIST_UPDATE_RESULT Insert(int index, T data)
 	{
-		if (index >= this->Size())
+		if (index >= this->Size() || index < 0)
 		{
 			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
@@ -192,7 +192,7 @@ public:
 
 	LIST_UPDATE_RESULT Delete(int index)
 	{
-		if (index >= this->Size())
+		if (index >= this->Size() || index < 0)
 		{
 			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
