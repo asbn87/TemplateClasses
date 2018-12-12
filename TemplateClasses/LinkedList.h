@@ -168,6 +168,10 @@ public:
 
 	void Delete(int index)
 	{
+		if (index >= this->Size())
+		{
+			return;
+		}
 		if (index > 0)
 		{
 			LinkedList<T>::Node* node = GetNode(index);

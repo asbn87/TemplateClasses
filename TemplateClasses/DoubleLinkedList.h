@@ -181,6 +181,10 @@ public:
 
 	void Delete(int index)
 	{
+		if (index >= this->Size())
+		{
+			return;
+		}
 		DoubleLinkedList<T>::Node* temp = GetNode(index);
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
