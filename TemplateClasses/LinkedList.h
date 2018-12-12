@@ -146,7 +146,7 @@ public:
 		}
 		else { PopFront(); }
 	};
-	T GetData(int index)
+	T Get(int index)
 	{
 		T data;
 		LinkedList<T>::Node* node = GetNode(index);
