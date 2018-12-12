@@ -179,9 +179,9 @@ public:
 			DoubleLinkedList<T>::Node* node = new DoubleLinkedList::Node(data);
 			DoubleLinkedList<T>::Node* temp = GetNode(index);
 			node->next = temp;
+			node->previous = temp->previous;
 			temp->previous->next = node;
 			temp->previous = node;
-			node->previous = temp->previous;
 		}
 		else 
 		{
