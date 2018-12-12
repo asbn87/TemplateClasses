@@ -20,6 +20,7 @@ TEST(DoubleLinkedListTests, WhenUsingGetCorrectDataShouldBeReturned)
 
 	EXPECT_EQ(2, list->Get(1));
 }
+
 TEST(DoubleLinkedListTests, WhenPushBackTailShouldBeUpdated)
 {
 	DoubleLinkedList<int>* list = new DoubleLinkedList<int>();

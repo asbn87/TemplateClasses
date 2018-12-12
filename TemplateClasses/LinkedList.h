@@ -34,8 +34,18 @@ private:
 		return curr;
 	};
 public:
-	~LinkedList() {};
 	LinkedList() : head{ NULL }, tail{ NULL } {};
+	~LinkedList() 
+	{
+		Node *current = this->head;
+		Node *next = this->head->next;
+		while (current != NULL)
+		{
+			delete current;
+			current = next;
+			next = next->next;
+		}
+	};
 	void PushFront(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
