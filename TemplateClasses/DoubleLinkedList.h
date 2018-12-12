@@ -8,15 +8,15 @@ private:
 	{
 	public:
 		T data;
-		DoubleLinkedList<T>::Node *next;
-		DoubleLinkedList<T>::Node *previous;
+		DoubleLinkedList<T>::Node* next;
+		DoubleLinkedList<T>::Node* previous;
 
-		Node() {}
+		Node() : data{}, next{ nullptr }, previous{ nullptr } {}
 		Node(T data)
 		{
 			this->data = data;
-			this->next = NULL;
-			this->previous = NULL;
+			this->next = nullptr;
+			this->previous = nullptr;
 		}
 		~Node() {}
 	};
@@ -29,9 +29,9 @@ private:
 		int count = 0;
 		while (count != index)
 		{
-			if (temp == NULL)
+			if (temp == nullptr)
 			{
-				return NULL;
+				return nullptr;
 			}
 			temp = temp->next;
 			count++;
@@ -40,17 +40,17 @@ private:
 	}
 
 public:
-	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
+	DoubleLinkedList() : head{ nullptr }, tail{ nullptr } {}
 
 	~DoubleLinkedList() 
 	{
 		Node* current = this->head;
-		if (current == NULL)
+		if (current == nullptr)
 		{
 			return;
 		}
 		Node* next = this->head->next;
-		while (current != NULL)
+		while (current != nullptr)
 		{
 			delete current;
 			current = next;
@@ -62,7 +62,7 @@ public:
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
 
-		if (head == NULL)
+		if (head == nullptr)
 		{
 			this->head = node;
 			this->tail = node;
@@ -78,7 +78,7 @@ public:
 	void PushBack(T data)
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
-		if (head == NULL)
+		if (head == nullptr)
 		{
 			this->head = node;
 			this->tail = node;
@@ -93,49 +93,65 @@ public:
 
 	T PopFront()
 	{
+		T data{};
 		DoubleLinkedList<T>::Node* node = this->head;
-		T data = node->data;
-		if (node->next != NULL)
+		if (node != nullptr)
 		{
-			this->head = this->head->next;
-			this->head->previous = NULL;
+			data = node->data;
+			if (node->next != nullptr)
+			{
+				this->head = this->head->next;
+				this->head->previous = nullptr;
+			}
+			else
+			{
+				this->head = nullptr;
+				this->tail = nullptr;
+			}
+			delete node;
+			return data;
 		}
 		else
 		{
-			this->head = NULL;
-			this->tail = NULL;
+			return data;
 		}
-		delete node;
-		return data;
 	}
 
 	T PopBack()
 	{
+		T data{};
 		DoubleLinkedList<T>::Node* node = this->tail;
-		T data = node->data;
-		if (node->previous != NULL)
+		if (node != nullptr)
 		{
-			this->tail = this->tail->previous;
-			this->tail->next = NULL;
+			data = node->data;
+			if (node->previous != nullptr)
+			{
+				this->tail = this->tail->previous;
+				this->tail->next = nullptr;
+			}
+			else
+			{
+				this->head = nullptr;
+				this->tail = nullptr;
+			}
+			delete node;
+			return data;
 		}
 		else
 		{
-			this->head = NULL;
-			this->tail = NULL;
+			return data;
 		}
-		delete node;
-		return data;
 	}
 
 	int Size()
 	{
-		if (this->head == NULL)
+		if (this->head == nullptr)
 		{
 			return 0;
 		}
 		DoubleLinkedList<T>::Node* temp = this->head;
 		int size = 0;
-		while (temp != NULL)
+		while (temp != nullptr)
 		{
 			temp = temp->next;
 			size++;
@@ -145,15 +161,15 @@ public:
 
 	T Get(int index)
 	{
-		T data;
+		T data{};
 		DoubleLinkedList<T>::Node* node = GetNode(index);
-		if (node != NULL)
+		if (node != nullptr)
 		{
 			return node->data; 
 		}
 		else
 		{
-			return data; 
+			return data;
 		}
 	}
 
