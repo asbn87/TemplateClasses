@@ -38,6 +38,10 @@ public:
 	~LinkedList() 
 	{
 		Node *current = this->head;
+		if (current == NULL)
+		{
+			return;
+		}
 		Node *next = this->head->next;
 		while (current != NULL)
 		{
