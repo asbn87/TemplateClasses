@@ -108,7 +108,6 @@ public:
 				this->tail = nullptr;
 			}
 			delete node;
-			return data;
 		}
 		return data;
 	}
@@ -128,13 +127,10 @@ public:
 				this->tail = nullptr;
 				return data;
 			}
-			else
+			while (current->next != nullptr)
 			{
-				while (current->next != nullptr)
-				{
-					previous = current;
-					current = current->next;
-				}
+				previous = current;
+				current = current->next;
 			}
 			previous->next = nullptr;
 			this->tail = previous;
@@ -193,9 +189,6 @@ public:
 		{ 
 			return node->data;
 		}
-		else
-		{
-			return data;
-		}
+		return data;
 	}
 };

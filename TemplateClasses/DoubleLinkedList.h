@@ -109,12 +109,8 @@ public:
 				this->tail = nullptr;
 			}
 			delete node;
-			return data;
 		}
-		else
-		{
-			return data;
-		}
+		return data;
 	}
 
 	T PopBack()
@@ -135,12 +131,8 @@ public:
 				this->tail = nullptr;
 			}
 			delete node;
-			return data;
 		}
-		else
-		{
-			return data;
-		}
+		return data;
 	}
 
 	int Size()
@@ -167,10 +159,7 @@ public:
 		{
 			return node->data; 
 		}
-		else
-		{
-			return data;
-		}
+		return data;
 	}
 
 	void Insert(int index, T data)
