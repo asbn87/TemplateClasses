@@ -40,7 +40,18 @@ private:
 
 public:
 	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
-	~DoubleLinkedList() {}
+	~DoubleLinkedList() 
+	{
+		Node *current = this->head;
+		Node *next = this->head->next;
+		while (current != NULL)
+		{
+			delete current;
+			current = next;
+			next = next->next;
+		}
+	}
+
 	void PushFront(T data)
 	{
 		DoubleLinkedList<T>::Node* node = new DoubleLinkedList<T>::Node(data);
@@ -130,8 +141,14 @@ public:
 	{
 		T data;
 		DoubleLinkedList<T>::Node* node = GetNode(index);
-		if (node != NULL) { return node->data; }
-		else { return data; }
+		if (node != NULL)
+		{
+			return node->data; 
+		}
+		else
+		{
+			return data; 
+		}
 	}
 
 	void Insert(int index, T data)
@@ -139,13 +156,16 @@ public:
 		if (index > 0)
 		{
 			DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node(data);
-			DoubleLinkedList<T>::Node *prev = GetNode(index - 1);
-			node->next = prev->next;
-			prev->next->previous = node;
-			prev->next = node;
-			node->previous = prev;
+			DoubleLinkedList<T>::Node *temp = GetNode(index);
+			node->next = temp;
+			temp->previous->next = node;
+			temp->previous = node;
+			node->previous = temp->previous;
 		}
-		else { PushFront(data); }
+		else 
+		{
+			PushFront(data); 
+		}
 	}
 
 	void Delete(int index)
