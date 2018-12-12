@@ -164,6 +164,10 @@ public:
 
 	void Insert(int index, T data)
 	{
+		if (index >= this->Size())
+		{
+			return;
+		}
 		if (index > 0)
 		{
 			DoubleLinkedList<T>::Node* node = new DoubleLinkedList::Node(data);

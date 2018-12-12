@@ -153,6 +153,10 @@ public:
 
 	void Insert(int index, T data)
 	{
+		if (index >= this->Size())
+		{
+			return;
+		}
 		if (index > 0)
 		{
 			LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
