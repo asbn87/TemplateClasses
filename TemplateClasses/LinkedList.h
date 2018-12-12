@@ -133,7 +133,7 @@ public:
 			node->next = prev->next;
 			prev->next = node;
 		}
-		else { pushFront(data); }
+		else { PushFront(data); }
 	};
 	void Delete(int index)
 	{
@@ -144,9 +144,9 @@ public:
 			node->next = prev->next;
 			delete node;
 		}
-		else { popFront(); }
+		else { PopFront(); }
 	};
-	T getData(int index)
+	T GetData(int index)
 	{
 		T data;
 		LinkedList<T>::Node* node = GetNode(index);
