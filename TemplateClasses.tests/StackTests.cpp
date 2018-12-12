@@ -3,41 +3,7 @@
 
 TEST(StackTests, WhenPushAddToTopOfStack)
 {
-	Stack<int> *stack = new Stack<int>();
-	stack->Push(1);
-	stack->Push(2);
-	stack->Push(3);
-
-	EXPECT_EQ(stack->Pop(), 3);
-}
-
-TEST(StackTests, WhenPushStackShouldIncreaseInSize)
-{
-	Stack<int> *stack = new Stack<int>();
-	stack->Push(1);
-	stack->Push(2);
-	stack->Push(3);
-	int size = stack->Size();
-	stack->Push(4);
-
-	EXPECT_TRUE(stack->Size() > size);
-}
-
-TEST(StackTests, WhenPopStackShouldDecreaseInSize)
-{
-	Stack<int> *stack = new Stack<int>();
-	stack->Push(1);
-	stack->Push(2);
-	stack->Push(3);
-	int size = stack->Size();
-	stack->Pop();
-
-	EXPECT_TRUE(stack->Size() < size);
-}
-
-TEST(StackTests, WhenPopCurrentTopShouldBeReturned)
-{
-	Stack<int> *stack = new Stack<int>();
+	Stack<int>* stack = new Stack<int>();
 	stack->Push(1);
 	stack->Push(2);
 	stack->Push(3);
@@ -45,77 +11,64 @@ TEST(StackTests, WhenPopCurrentTopShouldBeReturned)
 	EXPECT_EQ(3, stack->Pop());
 }
 
-TEST(StackTests, WhenStackIsEmptySizeOfStackShouldBeZero)
+TEST(StackTests, SizeShouldReturnCorrectLength)
 {
-	int size{ 10 };
-	Stack<int> *stack = new Stack<int>();
-	if(stack->Empty())
-		size = stack->Size();
-
-	EXPECT_EQ(size, 0);
-}
-
-TEST(StackTests, WhenTopIsCalledTheLastAddedInStackShouldBeReturned)
-{
-	Stack<int> *stack = new Stack<int>();
+	Stack<int>* stack = new Stack<int>();
 	stack->Push(1);
 	stack->Push(2);
 	stack->Push(3);
 	stack->Push(4);
-	stack->Push(5);
+	stack->Pop();
 
-	EXPECT_EQ(stack->Top(), 5);
+	EXPECT_EQ(3, stack->Size());
 }
 
-TEST(StackTests, WhenMixingPopAndPushTopShouldStillReturnCorrectData)
+TEST(StackTests, PopShouldReturnTopElementAndRemoveIt)
 {
-	Stack<std::string> *stack = new Stack<std::string>();
-	stack->Push("1");	// 1
-	stack->Pop();		//
-	stack->Push("2");	// 2
-	stack->Push("3");	// 2, 3
-	stack->Pop();		// 2
+	Stack<int>* stack = new Stack<int>();
+	stack->Push(1);
+	stack->Push(2);
+	stack->Push(3);
 
-	EXPECT_EQ("2", stack->Top());
+	EXPECT_EQ(3, stack->Pop());
+	EXPECT_EQ(2, stack->Size());
 }
 
-TEST(StackTests, WhenMixingPopAndPushSizeShouldStillBeCorrect)
+TEST(StackTests, WhenMixingPopAndPushPopShouldStillReturnCorrectData)
 {
-	Stack<int> *stack = new Stack<int>();
-	stack->Push(1);	// 1
-	stack->Pop();	//
-	stack->Push(2);	// 2
-	stack->Push(3);	// 2, 3
-	stack->Pop();	// 2
+	Stack<std::string>* stack = new Stack<std::string>();
+	stack->Push("1");
+	stack->Pop();
+	stack->Push("2");
+	stack->Push("3");
+	stack->Pop();
 
-	EXPECT_EQ(1, stack->Size());
+	EXPECT_EQ("2", stack->Pop());
 }
 
-TEST(StackTests, StackShouldBeAbleToStoreChars)
+TEST(StackTests, StackShouldBeAbleToStoreAndReturnChars)
 {
-	Stack<char> *stack = new Stack<char>();
+	Stack<char>* stack = new Stack<char>();
+	stack->Push('a');
+	stack->Push('b');
 
-	EXPECT_NO_THROW(stack->Push('a'));
+	EXPECT_EQ('b', stack->Pop());
 }
 
-TEST(StackTests, StackShouldBeAbleToStoreInts)
+TEST(StackTests, StackShouldBeAbleToStoreAndReturnInts)
 {
-	Stack<int> *stack = new Stack<int>();
+	Stack<int>* stack = new Stack<int>();
+	stack->Push(1);
+	stack->Push(2);
 
-	EXPECT_NO_THROW(stack->Push(1));
+	EXPECT_EQ(2, stack->Pop());
 }
 
 TEST(StackTests, StackShouldBeAbleToStoreStrings)
 {
-	Stack<std::string> *stack = new Stack<std::string>();
+	Stack<std::string>* stack = new Stack<std::string>();
+	stack->Push("This is string1");
+	stack->Push("This is string2");
 
-	EXPECT_NO_THROW(stack->Push("this is a string"));
+	EXPECT_EQ("This is string2", stack->Pop());
 }
-
-TEST(StackTests, StackShouldBeAbleToStoreDoubles)
-{
-	Stack<double> *stack = new Stack<double>();
-
-	EXPECT_NO_THROW(stack->Push(0.05));
-}
-

@@ -9,32 +9,40 @@ private:
 	public:
 		T data;
 		LinkedList<T>::Node* next;
-		Node() {};
+
+		Node() {}
 		Node(T data)
 		{
 			this->data = data;
 			this->next = NULL;
-		};
-		~Node() {};
+		}
+		~Node() {}
 	};
+
 	LinkedList<T>::Node* head, *tail;
+
 	LinkedList<T>::Node* GetNode(int index)
 	{
-		LinkedList<T>::Node* curr = this->head;
+		LinkedList<T>::Node* current = this->head;
 		int count{ 0 };
 		while (count != index)
 		{
-			if (curr->next != NULL)
+			if (current->next != NULL)
 			{
-				curr = curr->next;
+				current = current->next;
 				count++;
 			}
-			else { return NULL; }
+			else 
+			{ 
+				return NULL; 
+			}
 		}
-		return curr;
-	};
+		return current;
+	}
+
 public:
-	LinkedList() : head{ NULL }, tail{ NULL } {};
+	LinkedList() : head{ NULL }, tail{ NULL } {}
+
 	~LinkedList() 
 	{
 		Node *current = this->head;
@@ -49,7 +57,8 @@ public:
 			current = next;
 			next = next->next;
 		}
-	};
+	}
+
 	void PushFront(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
@@ -64,7 +73,8 @@ public:
 			node->next = head;
 			this->head = node;
 		}
-	};
+	}
+
 	void PushBack(T data)
 	{
 		LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
@@ -79,7 +89,8 @@ public:
 			this->tail->next = node;
 			this->tail = node;
 		}
-	};
+	}
+
 	T PopFront()
 	{
 		LinkedList<T>::Node* node = this->head;
@@ -87,7 +98,10 @@ public:
 		if (node != NULL)
 		{
 			data = node->data;
-			if (node->next != NULL) { this->head = this->head->next; }
+			if (node->next != NULL) 
+			{ 
+				this->head = this->head->next; 
+			}
 			else
 			{
 				this->head = NULL;
@@ -97,17 +111,18 @@ public:
 			return data;
 		}
 		return data;
-	};
+	}
+
 	T PopBack()
 	{
-		LinkedList<T>::Node* curr = this->head;
-		LinkedList<T>::Node* prev = curr;
+		LinkedList<T>::Node* current = this->head;
+		LinkedList<T>::Node* previous = current;
 		LinkedList<T>::Node* node = this->tail;
 		T data;
-		if (curr != NULL && node != NULL)
+		if (current != NULL && node != NULL)
 		{
 			data = node->data;
-			if (curr->next == NULL)
+			if (current->next == NULL)
 			{
 				this->head = NULL;
 				this->tail = NULL;
@@ -115,56 +130,72 @@ public:
 			}
 			else
 			{
-				while (curr->next != NULL)
+				while (current->next != NULL)
 				{
-					prev = curr;
-					curr = curr->next;
+					previous = current;
+					current = current->next;
 				}
 			}
-			prev->next = NULL;
-			this->tail = prev;
+			previous->next = NULL;
+			this->tail = previous;
 			delete node;
 		}
 		return data;
-	};
+	}
+
 	int Size()
 	{
-		LinkedList<T>::Node* curr = this->head;
+		LinkedList<T>::Node* current = this->head;
 		int size{ 0 };
-		while (curr != NULL)
+		while (current != NULL)
 		{
-			curr = curr->next;
+			current = current->next;
 			size++;
 		}
 		return size;
-	};
+	}
+
 	void Insert(int index, T data)
 	{
 		if (index > 0)
 		{
 			LinkedList<T>::Node* node = new LinkedList<T>::Node(data);
-			LinkedList<T>::Node* prev = GetNode(index - 1);
-			node->next = prev->next;
-			prev->next = node;
+			LinkedList<T>::Node* previous = GetNode(index - 1);
+			node->next = previous->next;
+			previous->next = node;
 		}
-		else { PushFront(data); }
-	};
+		else 
+		{ 
+			PushFront(data); 
+		}
+	}
+
 	void Delete(int index)
 	{
 		if (index > 0)
 		{
 			LinkedList<T>::Node* node = GetNode(index);
-			LinkedList<T>::Node* prev = GetNode(index - 1);
-			node->next = prev->next;
+			LinkedList<T>::Node* previous = GetNode(index - 1);
+			previous->next = node->next;
 			delete node;
 		}
-		else { PopFront(); }
-	};
+		else 
+		{ 
+			PopFront(); 
+		}
+	}
+
 	T Get(int index)
 	{
 		T data;
 		LinkedList<T>::Node* node = GetNode(index);
-		if(node != NULL) { return node->data; }
-		else { return data; }
+		if(node != NULL) 
+		{ 
+			return node->data; 
+		}
+		else 
+		{ 
+			return data; 
+		}
 	}
 };

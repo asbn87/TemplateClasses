@@ -11,26 +11,27 @@ private:
 		DoubleLinkedList<T>::Node *next;
 		DoubleLinkedList<T>::Node *previous;
 
-		Node() {};
+		Node() {}
 		Node(T data)
 		{
 			this->data = data;
 			this->next = NULL;
 			this->previous = NULL;
-		};
-		~Node() {};
+		}
+		~Node() {}
 	};
 
-	DoubleLinkedList<T>::Node *head, *tail;
-	DoubleLinkedList<T>::Node *GetNode(int index)
+	DoubleLinkedList<T>::Node* head, *tail;
+
+	DoubleLinkedList<T>::Node* GetNode(int index)
 	{
-		DoubleLinkedList<T>::Node *temp = this->head;
+		DoubleLinkedList<T>::Node* temp = this->head;
 		int count = 0;
 		while (count != index)
 		{
-			if (temp == nullptr)
+			if (temp == NULL)
 			{
-				return nullptr;
+				return NULL;
 			}
 			temp = temp->next;
 			count++;
@@ -40,14 +41,15 @@ private:
 
 public:
 	DoubleLinkedList() : head{ NULL }, tail{ NULL } {}
+
 	~DoubleLinkedList() 
 	{
-		Node *current = this->head;
+		Node* current = this->head;
 		if (current == NULL)
 		{
 			return;
 		}
-		Node *next = this->head->next;
+		Node* next = this->head->next;
 		while (current != NULL)
 		{
 			delete current;
@@ -159,8 +161,8 @@ public:
 	{
 		if (index > 0)
 		{
-			DoubleLinkedList<T>::Node *node = new DoubleLinkedList::Node(data);
-			DoubleLinkedList<T>::Node *temp = GetNode(index);
+			DoubleLinkedList<T>::Node* node = new DoubleLinkedList::Node(data);
+			DoubleLinkedList<T>::Node* temp = GetNode(index);
 			node->next = temp;
 			temp->previous->next = node;
 			temp->previous = node;
@@ -174,7 +176,7 @@ public:
 
 	void Delete(int index)
 	{
-		DoubleLinkedList<T>::Node *temp = GetNode(index);
+		DoubleLinkedList<T>::Node* temp = GetNode(index);
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
 		delete temp;

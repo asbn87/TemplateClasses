@@ -11,7 +11,7 @@ TEST(LinkedListTests, WhenPushFrontHeadShouldBeUpdated)
 	EXPECT_EQ(3, list->Get(0));
 }
 
-TEST(LinkedListTests, WhenPushFrontHeadsNextShouldBeOldHead)
+TEST(LinkedListTests, WhenUsingGetCorrectDataShouldBeReturned)
 {
 	LinkedList<int>* list = new LinkedList<int>();
 	list->PushFront(1);
@@ -20,6 +20,7 @@ TEST(LinkedListTests, WhenPushFrontHeadsNextShouldBeOldHead)
 
 	EXPECT_EQ(2, list->Get(1));
 }
+
 
 TEST(LinkedListTests, WhenPushBackTailShouldBeUpdated)
 {
@@ -31,55 +32,37 @@ TEST(LinkedListTests, WhenPushBackTailShouldBeUpdated)
 	EXPECT_EQ(3, list->Get(2));
 }
 
-TEST(LinkedListTests, HeadAndTailShouldNotBeTheSameWhenPushBack)
-{
-	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);
-	list->PushBack(2);
-	list->PushBack(3);
-
-	EXPECT_TRUE(list->Get(0) != list->Get(2));
-}
-
-TEST(LinkedListTests, HeadAndTailShouldNotBeTheSameWhenPushFront)
-{
-	LinkedList<int>* list = new LinkedList<int>();
-	list->PushFront(1);
-	list->PushFront(2);
-	list->PushFront(3);
-
-	EXPECT_TRUE(list->Get(0) != list->Get(2));
-}
-
-TEST(LinkedListTests, ListShouldBeAbleToStoreStrings)
+TEST(LinkedListTests, ListShouldBeAbleToStoreAndReturnStrings)
 {
 	LinkedList<std::string>* list = new LinkedList<std::string>();
-	
-	EXPECT_NO_THROW(list->PushFront("This is a string"));
+	list->PushFront("This is string1");
+	list->PushFront("This is string2");
+	list->PushFront("This is string3");
+
+	EXPECT_EQ("This is string2", list->Get(1));
 }
 
-TEST(LinkedListTests, ListShouldBeAbleToStoreInts)
+TEST(LinkedListTests, ListShouldBeAbleToStoreAndReturnInts)
 {
 	LinkedList<int>* list = new LinkedList<int>();
+	list->PushFront(10);
+	list->PushFront(20);
+	list->PushFront(30);
 
-	EXPECT_NO_THROW(list->PushFront(1));
+	EXPECT_EQ(20, list->Get(1));
 }
 
-TEST(LinkedListTests, ListShouldBeAbleToStoreChars)
+TEST(LinkedListTests, ListShouldBeAbleToStoreAndReturnChars)
 {
 	LinkedList<char>* list = new LinkedList<char>();
+	list->PushFront('a');
+	list->PushFront('b');
+	list->PushFront('c');
 
-	EXPECT_NO_THROW(list->PushFront('a'));
+	EXPECT_EQ('b', list->Get(1));
 }
 
-TEST(LinkedListTests, ListShouldBeAbleToStoreDoubles)
-{
-	LinkedList<double>* list = new LinkedList<double>();
-
-	EXPECT_NO_THROW(list->PushFront(0.05));
-}
-
-TEST(LinkedListTests, WhenWrongIndexIsCalledNullShouldBeReturnedFromGet)
+TEST(LinkedListTests, WhenGetWithIndexOutOfRangeIsCalledNoDataShouldBeReturned)
 {
 	LinkedList<std::string>* list = new LinkedList<std::string>();
 	list->PushBack("string1");
@@ -90,69 +73,67 @@ TEST(LinkedListTests, WhenWrongIndexIsCalledNullShouldBeReturnedFromGet)
 	EXPECT_EQ("" , list->Get(4));
 }
 
-TEST(LinkedListTests, WhenRightIndexIsCalledCorrectDataShouldBeReturnedFromGet)
+TEST(LinkedListTests, SizeShouldReturnCorrectLength)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1); // 0
-	list->PushBack(2); // 1
-	list->PushBack(3); // 2
-	list->PushBack(4); // 3
-
-	EXPECT_EQ(2, list->Get(1));
-}
-
-TEST(LinkedListTests, WhenMixingPushAndPopSizeShouldBeCorrect)
-{
-	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);	// 1
-	list->PopBack();	// 0
-	list->PushFront(2);	// 1
-	list->PushBack(3);	// 2
-	list->PushBack(4);	// 3
-	list->PopFront();	// 2
-	list->PushFront(5); // 3
-	list->PopBack();	// 2
+	list->PushBack(1);
+	list->PopBack();
+	list->PushFront(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	list->PopFront();
+	list->PushFront(5);
+	list->PopBack();
 
 	EXPECT_EQ(2, list->Size());
 }
 
-TEST(LinkedListTests, WhenMixingPushAndPopHeadShouldBeCorrect)
+TEST(LinkedListTests, PopFrontShouldReturnFirstElement)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);	// 1
-	list->PopBack();	//
-	list->PushFront(2); // 2
-	list->PushBack(3);	// 2, 3
-	list->PushBack(4);	// 2, 3, 4
-	list->PopFront();	// 3, 4
-	list->PushFront(5); // 5, 3, 4
-	list->PopBack();	// 5, 3
+	list->PushFront(1);
+	list->PushFront(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	list->PushFront(5);
 
-	EXPECT_EQ(5, list->Get(0));
+	EXPECT_EQ(5, list->PopFront());
 }
 
-TEST(LinkedListTests, WhenMixingPushAndPopTailShouldBeCorrect)
+TEST(LinkedListTests, PopBackShouldReturnLastElement)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);	// 1
-	list->PushFront(2); // 2, 1
-	list->PushBack(3);	// 2, 1, 3
-	list->PopFront();	// 1, 3
-	list->PushFront(4); // 4, 1, 3
-	list->PopBack();	// 4, 1
-	list->PushBack(5);	// 4, 1, 5
+	list->PushFront(1);
+	list->PushFront(2);
+	list->PushBack(3);
+	list->PushFront(4);
+	list->PushBack(5);
 
-	EXPECT_EQ(5, list->Get(list->Size()-1));
+	EXPECT_EQ(5, list->PopBack());
 }
 
-TEST(LinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndex)
+
+TEST(LinkedListTests, WhenInsertingDataShouldBeStoredAtCorrectIndexAndIndexUpdated)
 {
 	LinkedList<int>* list = new LinkedList<int>();
-	list->PushBack(1);	// 1
-	list->PushBack(2);	// 1, 2
-	list->PushBack(3);	// 1, 2, 3
-	list->PushBack(4);	// 1, 2, 3, 4
-	list->Insert(2, 9); // 2
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	list->Insert(2, 9);
 
 	EXPECT_EQ(9, list->Get(2));
+	EXPECT_EQ(3, list->Get(3));
+}
+
+TEST(LinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdated)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->PushBack(1);
+	list->PushBack(2);
+	list->PushBack(3);
+	list->PushBack(4);
+	list->Delete(2);
+
+	EXPECT_EQ(4, list->Get(2));
 }

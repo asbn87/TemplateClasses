@@ -9,8 +9,17 @@ private:
 public:
 	Queue(){}
 	~Queue(){}
-	int Size() { return queue.size(); }
-	void Push(T data) { queue.insert(queue.end(), data); }
+
+	int Size() 
+	{ 
+		return queue.size(); 
+	}
+
+	void Push(T data) 
+	{ 
+		queue.insert(queue.end(), data); 
+	}
+
 	T Pop()
 	{
 		T data = queue.front();
