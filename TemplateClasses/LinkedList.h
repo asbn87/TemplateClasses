@@ -41,6 +41,12 @@ private:
 	}
 
 public:
+	typedef enum
+	{
+		LIST_UPDATE_RESULT_SUCCESS,
+		LIST_UPDATE_RESULT_OUT_OF_RANGE
+	}LIST_UPDATE_RESULT;
+
 	LinkedList() : head{ nullptr }, tail{ nullptr } {}
 
 	~LinkedList() 
@@ -151,11 +157,11 @@ public:
 		return size;
 	}
 
-	void Insert(int index, T data)
+	LIST_UPDATE_RESULT Insert(int index, T data)
 	{
 		if (index >= this->Size())
 		{
-			return;
+			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
 		if (index > 0)
 		{
@@ -168,13 +174,14 @@ public:
 		{ 
 			PushFront(data); 
 		}
+		return LIST_UPDATE_RESULT_SUCCESS;
 	}
 
-	void Delete(int index)
+	LIST_UPDATE_RESULT Delete(int index)
 	{
 		if (index >= this->Size())
 		{
-			return;
+			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
 		if (index > 0)
 		{
@@ -187,6 +194,7 @@ public:
 		{ 
 			PopFront(); 
 		}
+		return LIST_UPDATE_RESULT_SUCCESS;
 	}
 
 	T Get(int index)

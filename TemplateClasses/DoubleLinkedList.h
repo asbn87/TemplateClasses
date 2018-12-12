@@ -40,6 +40,12 @@ private:
 	}
 
 public:
+	typedef enum
+	{
+		LIST_UPDATE_RESULT_SUCCESS,
+		LIST_UPDATE_RESULT_OUT_OF_RANGE
+	}LIST_UPDATE_RESULT;
+
 	DoubleLinkedList() : head{ nullptr }, tail{ nullptr } {}
 
 	~DoubleLinkedList() 
@@ -162,11 +168,11 @@ public:
 		return data;
 	}
 
-	void Insert(int index, T data)
+	LIST_UPDATE_RESULT Insert(int index, T data)
 	{
 		if (index >= this->Size())
 		{
-			return;
+			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
 		if (index > 0)
 		{
@@ -181,17 +187,19 @@ public:
 		{
 			PushFront(data); 
 		}
+		return LIST_UPDATE_RESULT_SUCCESS;
 	}
 
-	void Delete(int index)
+	LIST_UPDATE_RESULT Delete(int index)
 	{
 		if (index >= this->Size())
 		{
-			return;
+			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
 		DoubleLinkedList<T>::Node* temp = GetNode(index);
 		temp->previous->next = temp->next;
 		temp->next->previous = temp->previous;
 		delete temp;
+		return LIST_UPDATE_RESULT_SUCCESS;
 	}
 };
