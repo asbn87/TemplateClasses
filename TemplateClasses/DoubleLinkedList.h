@@ -199,8 +199,14 @@ public:
 		DoubleLinkedList<T>::Node* temp = GetNode(index);
 		DoubleLinkedList<T>::Node* previous = temp->previous;
 		DoubleLinkedList<T>::Node* next = temp->next;
-		previous->next = next;
-		next->previous = previous;
+		if (previous != nullptr)
+		{
+			previous->next = next;
+		}
+		if (next != nullptr)
+		{
+			next->previous = previous;
+		}
 		delete temp;
 		return LIST_UPDATE_RESULT_SUCCESS;
 	}
