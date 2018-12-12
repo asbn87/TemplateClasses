@@ -147,9 +147,11 @@ TEST(DoubleLinkedListTests, WhenDeletingCorrectDataShouldBeDeletedAndIndexUpdate
 	list->PushBack(2);
 	list->PushBack(3);
 	list->PushBack(4);
+	list->PushBack(5);
+	list->PushBack(6);
 	DoubleLinkedList<int>::LIST_UPDATE_RESULT result = list->Delete(2);
 
-	EXPECT_EQ(4, list->Get(2));
+	EXPECT_EQ(6, list->Get(4));
 	EXPECT_EQ(DoubleLinkedList<int>::LIST_UPDATE_RESULT_SUCCESS, result);
 }
 

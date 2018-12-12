@@ -197,8 +197,10 @@ public:
 			return LIST_UPDATE_RESULT_OUT_OF_RANGE;
 		}
 		DoubleLinkedList<T>::Node* temp = GetNode(index);
-		temp->previous->next = temp->next;
-		temp->next->previous = temp->previous;
+		DoubleLinkedList<T>::Node* previous = temp->previous;
+		DoubleLinkedList<T>::Node* next = temp->next;
+		previous->next = next;
+		next->previous = previous;
 		delete temp;
 		return LIST_UPDATE_RESULT_SUCCESS;
 	}
