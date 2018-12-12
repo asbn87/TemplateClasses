@@ -164,7 +164,7 @@ public:
 
 	void Insert(int index, T data)
 	{
-		if (index >= this->Size())
+		if (index >= this->Size() || index < 0)
 		{
 			return;
 		}
