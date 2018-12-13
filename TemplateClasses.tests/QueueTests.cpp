@@ -71,3 +71,10 @@ TEST(QueueTests, QueueShouldBeAbleToStoreStrings)
 
 	EXPECT_EQ("This is string1", queue->Pop());
 }
+
+TEST(QueueTests, PopShouldReturnNoDataWhenQueueIsEmpty)
+{
+	Queue<int>* queue = new Queue<int>();
+	
+	EXPECT_EQ(NULL, queue->Pop());
+}

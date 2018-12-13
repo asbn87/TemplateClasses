@@ -22,7 +22,12 @@ public:
 
 	T Pop()
 	{
-		T data = queue.front();
+		T data{};
+		if (this->Size() <= 0)
+		{
+			return data;
+		}
+		data = queue.front();
 		queue.erase(queue.begin());
 		return data;
 	}
