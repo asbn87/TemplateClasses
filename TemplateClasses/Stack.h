@@ -17,13 +17,18 @@ public:
 
 	T Pop()
 	{ 
-		T data = stack.back(); 
+		T data{};
+		if (this->Size() <= 0)
+		{
+			return data;
+		}
+		data = stack.back(); 
 		stack.pop_back();
 		return data;
 	}
 
 	int Size() 
 	{ 
-		return stack.size(); 
+		return stack.size();
 	}
 };

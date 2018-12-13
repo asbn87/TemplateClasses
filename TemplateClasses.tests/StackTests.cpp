@@ -72,3 +72,10 @@ TEST(StackTests, StackShouldBeAbleToStoreStrings)
 
 	EXPECT_EQ("This is string2", stack->Pop());
 }
+
+TEST(StackTests, PopShouldReturnNoDataWhenStackIsEmpty)
+{
+	Stack<int>* stack = new Stack<int>();
+
+	EXPECT_EQ(NULL, stack->Pop());
+}
