@@ -2,6 +2,7 @@
 School project in datastructures and algorithms
 
 # Task
+```
 Create a class Queue
 Create a class Stack
 Create a class DoubleLinkedList
@@ -14,3 +15,4 @@ Ex. Queue<Account>
 All classes should have unit-tests. 
 
 GitHub should be used for source code.
+```
